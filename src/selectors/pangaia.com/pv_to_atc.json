@@ -1,0 +1,73 @@
+{
+  "url": "https://pangaia.com/",
+  "timestamp": "2024-03-24",
+  "elements": {
+    "hasCookieBanner": true,
+    "cookies": {
+      "accept": {
+        "elementType": "cookieAccept",
+        "selectors": {
+          "primary": "#termly-code-snippet-support",
+          "secondary": [".termly-styles-container button[data-uuid='accept-all']"],
+          "xpath": "//button[contains(text(),'Accept All')]"
+        },
+        "location": "Bottom banner",
+        "priority": 1
+      }
+    },
+    "product": {
+      "url": "/products/365-midweight-hoodie-black",
+      "addToCart": {
+        "elementType": "addToCart",
+        "selectors": {
+          "primary": ".product-card__quick-buy-button",
+          "secondary": [".button--primary-blue[data-id='ProductCard-QuickBuyLink']"],
+          "xpath": "//button[contains(@class,'product-card__quick-buy-button')]"
+        },
+        "location": "Product card",
+        "priority": 1
+      }
+    },
+    "addtocart": {
+      "button": {
+        "elementType": "addToCartButton",
+        "selectors": {
+          "primary": ".add-to-cart-button",
+          "secondary": [".button--primary-blue[name='add']"],
+          "xpath": "//button[contains(@class,'add-to-cart-button')]"
+        },
+        "location": "Product page",
+        "priority": 1
+      }
+    },
+    "checkout": {
+      "button": {
+        "elementType": "checkoutButton",
+        "selectors": {
+          "primary": "#CartContent-CheckoutButton",
+          "secondary": [".cart-checkout-button"],
+          "xpath": "//button[@name='checkout']"
+        },
+        "location": "Cart drawer",
+        "priority": 1
+      }
+    },
+    "popups": [
+      {
+        "elementType": "locationPopup",
+        "selectors": {
+          "primary": "#md-app-embed__modal",
+          "secondary": [".md-modal__dialog"],
+          "xpath": "//div[@class='md-modal__dialog']"
+        },
+        "location": "Page overlay",
+        "priority": 2
+      }
+    ]
+  },
+  "notes": [
+    "Location selector popup appears on first visit",
+    "Cart drawer opens after adding product to cart",
+    "Quick buy functionality available on product cards"
+  ]
+}
