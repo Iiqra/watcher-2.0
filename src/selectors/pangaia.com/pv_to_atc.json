@@ -1,17 +1,17 @@
 {
-  "url": "https://pangaia.com/",
-  "timestamp": "2024-03-24",
+  "url": "https://pangaia.com",
+  "timestamp": "2024-03-26",
   "elements": {
     "hasCookieBanner": true,
     "cookies": {
       "accept": {
         "elementType": "cookieAccept",
         "selectors": {
-          "primary": "#termly-code-snippet-support",
-          "secondary": [".termly-styles-container button[data-uuid='accept-all']"],
-          "xpath": "//button[contains(text(),'Accept All')]"
+          "primary": "button.termly-styles-module-root-c82f71.termly-styles-module-primary-c2e506.termly-styles-module-solid-f10ff4.termly-styles-button-a4543c.termly-styles-modal-f41b40.t-acceptAllButton",
+          "secondary": [".termly-styles-button-a4543c[data-tid='banner-accept']"],
+          "xpath": "//button[contains(@class, 't-acceptAllButton')]"
         },
-        "location": "Bottom banner",
+        "location": "Cookie consent banner",
         "priority": 1
       }
     },
@@ -20,32 +20,20 @@
       "addToCart": {
         "elementType": "addToCart",
         "selectors": {
-          "primary": ".product-card__quick-buy-button",
-          "secondary": [".button--primary-blue[data-id='ProductCard-QuickBuyLink']"],
-          "xpath": "//button[contains(@class,'product-card__quick-buy-button')]"
+          "primary": "button.product-card__quick-buy-button",
+          "secondary": [".add-to-cart-button"],
+          "xpath": "//button[contains(@class, 'product-card__quick-buy-button')]"
         },
         "location": "Product card",
         "priority": 1
       }
     },
-    "addtocart": {
-      "button": {
-        "elementType": "addToCartButton",
-        "selectors": {
-          "primary": ".add-to-cart-button",
-          "secondary": [".button--primary-blue[name='add']"],
-          "xpath": "//button[contains(@class,'add-to-cart-button')]"
-        },
-        "location": "Product page",
-        "priority": 1
-      }
-    },
     "checkout": {
       "button": {
-        "elementType": "checkoutButton",
+        "elementType": "checkout",
         "selectors": {
-          "primary": "#CartContent-CheckoutButton",
-          "secondary": [".cart-checkout-button"],
+          "primary": "button.cart-checkout-button.button--primary-blue",
+          "secondary": ["#CartContent-CheckoutButton"],
           "xpath": "//button[@name='checkout']"
         },
         "location": "Cart drawer",
@@ -54,20 +42,21 @@
     },
     "popups": [
       {
-        "elementType": "locationPopup",
+        "elementType": "countrySelector",
         "selectors": {
-          "primary": "#md-app-embed__modal",
-          "secondary": [".md-modal__dialog"],
-          "xpath": "//div[@class='md-modal__dialog']"
+          "primary": ".md-app-embed#md-app-embed__modal",
+          "secondary": [".md-modal__container"],
+          "xpath": "//div[@class='md-app-embed']"
         },
         "location": "Page overlay",
-        "priority": 2
+        "priority": 2,
+        "timing": "On first visit"
       }
     ]
   },
   "notes": [
-    "Location selector popup appears on first visit",
-    "Cart drawer opens after adding product to cart",
-    "Quick buy functionality available on product cards"
+    "Country selector popup appears before any cart interactions",
+    "Cart drawer opens after clicking add to cart button",
+    "Cookie banner appears on first visit"
   ]
 }

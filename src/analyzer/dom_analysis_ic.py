@@ -30,6 +30,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def normalize_file_name(filename: str):
+    return filename.replace("https://", "").replace("http://", "").replace("/", "")
 
 def wait_for_dom_stability(page, check_interval=0.5, stable_iterations=3, timeout=5.0):
     """
@@ -61,6 +63,10 @@ def main():
     target_url = sys.argv[1] if len(sys.argv) > 1 else "https://www.grass-direct.co.uk/"
     print("Target URL:", target_url)
 
+    # 1.a) Prepare a folder in the selectors for this client.
+    if not os.path.exists("../selectors/{}".format(normalize_file_name(target_url))):
+        os.makedirs("../selectors/{}".format(normalize_file_name(target_url)))
+
     # 2) Set up Anthropic
     api_key = os.getenv("ANTHROPIC_API_KEY")
 
@@ -80,7 +86,7 @@ def main():
 
         # Optional: Extra wait for JS-driven DOM changes
         wait_for_dom_stability(page, check_interval=0.5, stable_iterations=3, timeout=5.0)
-
+         
         # 4) Extract final HTML
         html = page.content()
         print(f"HTML length: {len(html)}")
@@ -267,6 +273,9 @@ Please analyze the incoming HTML following these guidelines and return a single 
     #print(response.content)
     blocks = response.content  # This is a list of TextBlock objects
     combined_text = "\n".join(block.text for block in blocks)
+    
+    print(type(blocks), len(blocks))
+    implicit_json = blocks[0]
 
     # 3) Look for JSON in triple-backticks
     match = re.search(r"```json(.*?)```", combined_text, flags=re.DOTALL)
@@ -282,11 +291,10 @@ Please analyze the incoming HTML following these guidelines and return a single 
             # Write to file.
             file_name = sys.argv[1] if len(sys.argv) > 1 else "www.grass-direct.co.uk.json"
             if file_name != "www.grass-direct.co.uk.json":
-                file_name = file_name.replace("https://", "").replace("http://", "").replace("/", "")
-                file_name += ".json"
+                file_name = normalize_file_name(file_name)
             
             print("=== WRITING JSON TO FILE {} ===".format(file_name))
-            with open(file_name, "w+") as output_file:
+            with open("../selectors/{}/ic.json".format(file_name), "w+") as output_file:
                 output_file.write(json_str)
         except json.JSONDecodeError:
             print("=== RAW TEXT (JSON decode error) ===")
@@ -295,6 +303,9 @@ Please analyze the incoming HTML following these guidelines and return a single 
         # If there's no code block or you prefer to just print everything:
         print("=== RAW TEXT ===")
         print(combined_text)
+
+        print("=== RAW JSON ===")
+        print(implicit_json)
 
 if __name__ == "__main__":
     main()

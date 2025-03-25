@@ -1,0 +1,85 @@
+{
+  "url": "https://bibado.co.uk/",
+  "timestamp": "2024-02-27",
+  "elements": {
+    "hasCookieBanner": true,
+    "cookies": {
+      "accept": {
+        "elementType": "cookieAccept",
+        "selectors": {
+          "primary": ".cc-btn.cc-btn-decision.cc-allow",
+          "secondary": [".cc-allow"],
+          "xpath": "//button[contains(@class, 'cc-allow')]"
+        },
+        "location": "Bottom cookie banner",
+        "priority": 1
+      },
+      "preferences": {
+        "elementType": "cookiePreferences",
+        "selectors": {
+          "primary": ".cc-btn.cc-settings",
+          "secondary": [".cc-settings"],
+          "xpath": "//button[contains(@class, 'cc-settings')]"
+        },
+        "location": "Bottom cookie banner",
+        "priority": 2
+      },
+      "marketingChoices": true,
+      "analyticsChoices": true,
+      "functionalChoices": true
+    },
+    "product": {
+      "url": "/products/coverall-weaning-bib-long-sleeves",
+      "stock": {
+        "elementType": "stockStatus",
+        "selectors": {
+          "primary": "[data-product-inventory]",
+          "secondary": [".product-inventory"],
+          "xpath": "//div[contains(@class, 'product-inventory')]"
+        },
+        "location": "Product detail page",
+        "priority": 2
+      },
+      "addToCart": {
+        "elementType": "addToCart",
+        "selectors": {
+          "primary": "button[name='add']",
+          "secondary": [".product-form__submit"],
+          "xpath": "//button[@name='add']"
+        },
+        "location": "Product detail page",
+        "priority": 1
+      }
+    },
+    "checkout": {
+      "button": {
+        "elementType": "checkoutButton",
+        "selectors": {
+          "primary": ".cart-drawer__checkout-button",
+          "secondary": [".checkout-button"],
+          "xpath": "//a[contains(@class, 'cart-drawer__checkout-button')]"
+        },
+        "location": "Cart drawer",
+        "priority": 1
+      }
+    },
+    "popups": [
+      {
+        "elementType": "locationPopup",
+        "selectors": {
+          "primary": ".recommendation-modal__container",
+          "secondary": [".recommendation-modal"],
+          "xpath": "//div[contains(@class, 'recommendation-modal__container')]"
+        },
+        "location": "Page overlay",
+        "trigger": "Page load",
+        "priority": 1
+      }
+    ]
+  },
+  "notes": [
+    "Cookie banner includes granular consent options for marketing, analytics, and functional cookies",
+    "Location popup appears on first visit",
+    "Cart drawer opens after adding product to cart"
+  ]
+}
